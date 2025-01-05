@@ -20,10 +20,23 @@ public class ClientService {
         client.setFirstName(clientDto.firstName());
         client.setLastName(clientDto.lastName());
         client.setParticipation(clientDto.participation());
+        if (client == null
+            || client.getFirstName() == null
+            || client.getLastName() == null
+            || client.getParticipation() == null){
+
+            throw new NullPointerException();
+        }
         return clientRepository.save(client);
     }
 
     public List<Client> listAllClients(){
-        return clientRepository.findAll();
+        List<Client> allClient = clientRepository.findAll();
+
+        if (allClient == null){
+            throw new NullPointerException();
+        }
+
+        return allClient;
     }
 }
